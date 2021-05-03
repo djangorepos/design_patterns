@@ -1,8 +1,8 @@
 from abc import ABC, abstractmethod
 from time import perf_counter
 
-Number: int = 100
-SHOW_DICT = False
+Number: int = 10
+SHOW_DICT = True
 
 
 class Strategy(ABC):
