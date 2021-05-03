@@ -1,7 +1,8 @@
 from abc import ABC, abstractmethod
 from time import perf_counter
 
-Number: int = 100
+Number: int = 10000
+SHOW_DICT = False
 
 
 class Strategy(ABC):
@@ -11,33 +12,44 @@ class Strategy(ABC):
 
 class ConcreteStrategyA(Strategy):
     def algorithm_interface(self):
-        print('Using cycle for')
-        fib1 = fib2 = 1
+        print('Algorithm: Using cycle for')
+        cache = {1: 1, 2: 1}
         n = Number
-        print(fib1, fib2, end=' ')
-
+        fib1 = fib2 = 1
         for i in range(2, n):
             fib1, fib2 = fib2, fib1 + fib2
-            print(fib2, end=' ')
+            cache[i + 1] = fib2
+        n = fib2
+        if SHOW_DICT:
+            print(n, cache.values(), end=' ')
+        else:
+            print(n, end=' ')
 
 
 class ConcreteStrategyB(Strategy):
     def algorithm_interface(self):
-        print('Using cycle while')
+        print('Algorithm: Using cycle while')
+        cache = {1: 1, 2: 1}
         fib1 = fib2 = 1
-        print(fib1, fib2, end=' ')
         n = Number - 2
+        i = 2
 
         while n > 0:
             fib1, fib2 = fib2, fib1 + fib2
+            cache[i + 1] = fib2
+            i += 1
             n -= 1
-            print(fib2, end=' ')
+        n = fib2
+        if SHOW_DICT:
+            print(n, cache.values(), end=' ')
+        else:
+            print(n, end=' ')
 
 
 class ConcreteStrategyC(Strategy):
 
     def algorithm_interface(self):
-        print('Using recursion')
+        print('Algorithm: Using recursion')
         cache = {1: 1, 2: 1}
 
         def fib(n):
@@ -47,7 +59,10 @@ class ConcreteStrategyC(Strategy):
                 cache[n] = result
             return result
 
-        print(fib(Number), cache.values())
+        if SHOW_DICT:
+            print(fib(Number), cache.values(), end=' ')
+        else:
+            print(fib(Number), end=' ')
 
 
 class Context:
@@ -64,7 +79,7 @@ class Context:
         self._strategy = strategy
 
     def context_interface(self) -> None:
-        print("Context: Calculating fibonacci number using the strategy (not sure how it'll do it)")
+        print(f"Context: Calculating {Number} fibonacci numbers using the strategy (not sure how it'll do it)")
         self._strategy.algorithm_interface()
         print()
         print('Time run:', perf_counter() - self._start)
