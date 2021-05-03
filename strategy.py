@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from time import perf_counter
 
-Number: int = 10000
+Number: int = 10
 SHOW_DICT = False
 
 
