@@ -87,7 +87,7 @@ class ConcreteStrategyD(Strategy):
 class Context:
     def __init__(self, strategy: Strategy) -> None:
         self._strategy = strategy
-        self._start = perf_counter();
+        self._start = perf_counter()
 
     @property
     def strategy(self) -> Strategy:
@@ -114,7 +114,7 @@ if __name__ == "__main__":
     context.strategy = ConcreteStrategyB()
     context.context_interface()
 
-    # context = Context(ConcreteStrategyC())
+    context = Context(ConcreteStrategyC())
     print("Client: Strategy is set to recursion.")
     context.context_interface()
 
