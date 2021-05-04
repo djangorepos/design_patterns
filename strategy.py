@@ -1,7 +1,8 @@
 from abc import ABC, abstractmethod
 from time import perf_counter
+import numpy as np
 
-Number: int = 10
+NUMBER: int = 10
 SHOW_DICT = True
 
 
@@ -14,7 +15,7 @@ class ConcreteStrategyA(Strategy):
     def algorithm_interface(self):
         print('Algorithm: Using cycle for')
         cache = {1: 1, 2: 1}
-        n = Number
+        n = NUMBER
         fib1 = fib2 = 1
         for i in range(2, n):
             fib1, fib2 = fib2, fib1 + fib2
@@ -31,7 +32,7 @@ class ConcreteStrategyB(Strategy):
         print('Algorithm: Using cycle while')
         cache = {1: 1, 2: 1}
         fib1 = fib2 = 1
-        n = Number - 2
+        n = NUMBER - 2
         i = 2
 
         while n > 0:
@@ -60,9 +61,27 @@ class ConcreteStrategyC(Strategy):
             return result
 
         if SHOW_DICT:
-            print(fib(Number), cache.values(), end=' ')
+            print(fib(NUMBER), cache.values(), end=' ')
         else:
-            print(fib(Number), end=' ')
+            print(fib(NUMBER), end=' ')
+
+
+class ConcreteStrategyD(Strategy):
+
+    def algorithm_interface(self):
+        print('Algorithm: Using matrix')
+        cache = {1: 1, 2: 1}
+
+        def fib(n):
+            for i in range(3, n+1):
+                result = np.matrix([[1, 1], [1, 0]], dtype=object) ** i
+                cache[i] = result[0, 1]
+            return result[0, 1]
+
+        if SHOW_DICT:
+            print(fib(NUMBER), cache.values(), end=' ')
+        else:
+            print(fib(NUMBER), end=' ')
 
 
 class Context:
@@ -79,7 +98,7 @@ class Context:
         self._strategy = strategy
 
     def context_interface(self) -> None:
-        print(f"Context: Calculating {Number} fibonacci numbers using the strategy (not sure how it'll do it)")
+        print(f"Context: Calculating {NUMBER} fibonacci numbers using the strategy (not sure how it'll do it)")
         self._strategy.algorithm_interface()
         print()
         print('Time run:', perf_counter() - self._start)
@@ -95,6 +114,10 @@ if __name__ == "__main__":
     context.strategy = ConcreteStrategyB()
     context.context_interface()
 
-    context = Context(ConcreteStrategyC())
+    # context = Context(ConcreteStrategyC())
     print("Client: Strategy is set to recursion.")
+    context.context_interface()
+
+    context = Context(ConcreteStrategyD())
+    print("Client: Strategy is set to matrix.")
     context.context_interface()
