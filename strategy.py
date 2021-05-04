@@ -1,8 +1,12 @@
+import time
 from abc import ABC, abstractmethod
 from time import perf_counter
 import numpy as np
+import os
+
 
 NUMBER: int = 10
+RECURSION = True
 SHOW_DICT = True
 
 
@@ -116,8 +120,12 @@ if __name__ == "__main__":
 
     context = Context(ConcreteStrategyC())
     print("Client: Strategy is set to recursion.")
-    context.context_interface()
+    if RECURSION:
+        context.context_interface()
 
     context = Context(ConcreteStrategyD())
     print("Client: Strategy is set to matrix.")
+    if NUMBER == 10000:
+        time.sleep(3)
+        os.system("python matrix.py")
     context.context_interface()
