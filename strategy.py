@@ -1,13 +1,14 @@
-import time
 from abc import ABC, abstractmethod
-from time import perf_counter
+from time import perf_counter, sleep
 import numpy as np
 import os
 
-
-NUMBER: int = 10
 RECURSION = True
 SHOW_DICT = True
+NUMBER: int = 10
+if NUMBER > 10000:
+    RECURSION = False
+    SHOW_DICT = False
 
 
 class Strategy(ABC):
@@ -125,7 +126,7 @@ if __name__ == "__main__":
 
     context = Context(ConcreteStrategyD())
     print("Client: Strategy is set to matrix.")
-    if NUMBER == 10000:
-        time.sleep(3)
+    if NUMBER == 100000:
+        sleep(3)
         os.system("python matrix.py")
     context.context_interface()

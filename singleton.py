@@ -9,6 +9,7 @@ class Singleton:
 if __name__ == "__main__":
     s1 = Singleton()
     print("Object created", s1, "id =", id(s1))
+
     # Singleton.instance = '<__main__.Singleton object at 0x0000027671C5DF70>'
 
     s2 = Singleton()
