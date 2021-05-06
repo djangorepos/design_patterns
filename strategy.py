@@ -5,7 +5,7 @@ import os
 
 RECURSION = True
 SHOW_DICT = True
-NUMBER: int = 10
+NUMBER: int = 100000
 if NUMBER > 10000:
     RECURSION = False
     SHOW_DICT = False
