@@ -8,15 +8,15 @@ class Context:
     _state = None
 
     def __init__(self, state: State) -> None:
-        print(f'Server: Loading, please wait...')
+        print('Server: Loading, please wait...')
         self.transition_to(state)
-        print('Server: Online mode')
+        print('Server: Online mode.')
 
     def transition_to(self, state: State):
         print(f'Server: Changing state to {type(state).__name__}')
-        for i in range(50):
+        for i in range(42):
             print('#', end='')
-            sleep(0.1)
+            sleep(0.05)
         print()
         self._state = state
         self._state.context = self
@@ -51,29 +51,29 @@ class State(ABC):
 class ConcreteStateA(State):
     def handle1(self) -> None:
         print('Server: Working online. Received offline request.')
-        print('Switching to offline mode. Please wait...')
+        print('Server: Switching to offline mode. Please wait...')
         self.context.transition_to(ConcreteStateB())
-        print('Server: Offline mode')
+        print('Server: Offline mode.')
 
     def handle2(self) -> None:
         for i in range(4):
             _ping: int = randint(1, 100)
             print(f'Server: Working online. Ping {_ping} ms. Packet loss is 0%')
-            sleep(0.5)
+            sleep(1)
 
 
 class ConcreteStateB(State):
     def handle1(self) -> None:
-        print('Server: Offline mode.')
+        print(f'Server: Offline mode.')
 
     def handle2(self) -> None:
         print('Server: Received online request.')
-        print('Switching to online mode. Please wait...')
+        print('Server: Switching to online mode. Please wait...')
         self.context.transition_to(ConcreteStateA())
-        print('Server: Online mode')
+        print('Server: Online mode.')
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     server = Context(ConcreteStateA())
     print()
 
