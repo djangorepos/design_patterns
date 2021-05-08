@@ -14,9 +14,10 @@ class Context:
 
     def transition_to(self, state: State):
         print(f'Server: Changing state to {type(state).__name__}')
-        for i in range(42):
+        for i in range(101):
+            print(f'\r{i}% ', end=i*'#')
+            sleep(0.01)
             print('#', end='')
-            sleep(0.05)
         print()
         self._state = state
         self._state.context = self
@@ -64,7 +65,7 @@ class ConcreteStateA(State):
 
 class ConcreteStateB(State):
     def handle1(self) -> None:
-        print(f'Server: Offline mode.')
+        print('Server: Offline mode.')
 
     def handle2(self) -> None:
         print('Server: Received online request.')
