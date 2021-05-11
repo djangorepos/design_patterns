@@ -16,8 +16,7 @@ class Creator(ABC):
         random_string = ""
         for _ in range(len(SPEECH)):
             random_string += product.operation()
-        result = f"Ape: pressinganykey: {random_string}"
-        return result
+        return random_string
 
 
 class ConcreteCreator(Creator):
@@ -39,8 +38,7 @@ class ConcreteProduct(Product):
 
 
 def client_code(creator: Creator) -> str:
-    return (f"William Shakespeare: {SPEECH} \n"
-            f"{creator.some_operation()}")
+    return creator.some_operation()
 
 
 if __name__ == "__main__":
@@ -49,12 +47,14 @@ if __name__ == "__main__":
         monkey_code = client_code(ConcreteCreator())
         Apes += 1
         if SPEECH != monkey_code:
-            print(monkey_code)
+            print(f"William Shakespeare: {SPEECH}")
+            print(f"Ape: pressinganykey: {monkey_code}")
             print(f"Shakespeare wins, Apes = {Apes}\n")
             with open('monkeys.txt', 'a') as file:
-                file.write(f"{monkey_code}\n"
-                           f"Shakespeare wins, Apes = {Apes}\n")
+                file.write(f"{monkey_code}\n")
         else:
             SPEECH = ''
             print("Monkey wins")
+            with open('monkeys.txt', 'a') as file:
+                file.write("Monkey wins")
             break
