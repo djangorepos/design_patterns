@@ -5,6 +5,7 @@
 **.cfg
 **.xml
 /monkeys.txt
+mt86plus
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
