@@ -45,7 +45,7 @@ def client_code(creator: Creator) -> str:
 
 if __name__ == "__main__":
     Apes = 0
-    while True:
+    while SPEECH:
         monkey_code = client_code(ConcreteCreator())
         Apes += 1
         if SPEECH != monkey_code:
@@ -55,6 +55,6 @@ if __name__ == "__main__":
                 file.write(f"{monkey_code}\n"
                            f"Shakespeare wins, Apes = {Apes}\n")
         else:
-            SPEECH = "Monkeys wins"
-            print(SPEECH)
+            SPEECH = ''
+            print("Monkey wins")
             break
