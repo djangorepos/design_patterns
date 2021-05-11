@@ -1,41 +1,36 @@
 from abc import ABCMeta, abstractmethod
-from decimal import *
-
-JSON = '{"total": 9.61, "items": ["Americano", "Omelet"]}' \
-       '{"total": 5.45, "items": ["Cappuccino", "Cookie"]}'
 
 
 class AbstractFactory(metaclass=ABCMeta):
+    file_cache = []
 
     @abstractmethod
-    def build_sequence(self):
-        pass
-
-    @abstractmethod
-    def build_number(self, string):
+    def sorting(self):
         pass
 
 
-class Factory(AbstractFactory):
-    def build_sequence(self):
-        return []
+class Factory1(AbstractFactory):
 
-    def build_number(self, string):
-        return Decimal(string)
-
-    @staticmethod
-    def load(string, factory):
-        sequence = factory.build_sequence()
-        for substring in string.split(','):
-            item = factory.build_number(substring)
-            sequence.append(item)
-        return sequence
+    def sorting(self) -> object:
+        with open('autoexec.cfg', 'r') as file_handler:
+            file1 = file_handler.readlines()
+        with open('autoexec.cfg', 'w') as file_handler:
+            new_file = sorted(file1)
+            file_handler.writelines(new_file)
+            return new_file
 
 
-f1 = Factory()
-result = f1.load('1.23, 4.56', f1)
-print(result)
+class Factory2(AbstractFactory):
+    def sorting(self) -> object:
+        with open('autoexec.cfg', 'r') as file_handler:
+            file2 = file_handler.readlines()
+        with open('autoexec.cfg', 'w') as file_handler:
+            new_file = sorted(file2, reverse=True)
+            file_handler.writelines(new_file)
+            return new_file
 
-f2 = Factory()
-result = f2.load(JSON[10:16]+JSON[59:63], f2)
+
+file_sort = Factory1()
+# file_sort = Factory2()
+result = file_sort.sorting()
 print(result)
