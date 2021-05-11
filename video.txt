@@ -1,3 +1,5 @@
+"video.cfg"
+{
 	"DeviceID"		"12677"
 	"VendorID"		"32902"
 	"Version"		"0"
@@ -73,6 +75,5 @@
 	"setting.useadvanced"		"1"
 	"setting.version"		"1"
 	"setting.version_advanced_video"		"1"
-"video.cfg"
-{
+
 }

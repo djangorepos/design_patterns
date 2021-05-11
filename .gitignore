@@ -4,6 +4,9 @@
 *.txt
 *.cfg
 *.idea/misc.xml
+/autoexec.cfg
+/mt86plus
+/video.txt
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
