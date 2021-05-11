@@ -17,7 +17,6 @@ class Context:
         for i in range(101):
             print(f'\r{i}% ', end=i*'#')
             sleep(0.01)
-            print('#', end='')
         print()
         self._state = state
         self._state.context = self

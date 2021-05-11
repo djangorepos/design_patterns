@@ -1,5 +1,9 @@
 # Created by .ignore support plugin (hsz.mobi)
 ### Python template
+*.backup
+*.txt
+*.cfg
+*.idea/misc.xml
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
