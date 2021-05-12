@@ -71,7 +71,7 @@ class Subsystem1:
                 cap = True
                 used = True
             elif j == 5:
-                print(ape_word, end='.\n  ')
+                print(ape_word, end='.\n')
                 cap = True
             elif j == 6:
                 print(ape_word, end='? ')
