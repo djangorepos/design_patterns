@@ -1,5 +1,4 @@
 from abc import ABC, abstractmethod
-
 from text_to_speech import speak
 
 
