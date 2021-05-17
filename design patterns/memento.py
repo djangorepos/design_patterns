@@ -17,7 +17,7 @@ def loading():
 
 
 class Originator:
-    _state = None
+    _state = Noney
 
     def __init__(self, state: list[str]) -> None:
         self._state = state
@@ -27,7 +27,7 @@ class Originator:
         print("Originator: Generating new file.")
         loading()
         self._state = self._generate_random_file(len(self._state))
-        with open('mt86plus', 'w') as mt86plus:
+        with open('temp/mt86plus', 'w') as mt86plus:
             mt86plus.writelines(self._state)
         print(f"Originator: My state has changed to: {self._state[0][:39]}")
 
@@ -53,7 +53,7 @@ class Originator:
     def restore(self, memento: Memento) -> None:
         self._state = memento.get_state()
         print(f"Originator: My state has restored to: {self._state[0][:39]}")
-        with open('mt86plus', 'w') as mt86plus:
+        with open('temp/mt86plus', 'w') as mt86plus:
             mt86plus.writelines(self._state)
 
 
@@ -119,13 +119,13 @@ class Caretaker:
 
 if __name__ == "__main__":
 
-    with open('mt86plus', 'r') as file_handler:
+    with open('temp/mt86plus', 'r') as file_handler:
         file = file_handler.readlines()
         temp = deepcopy(file)
     try:
-        open('mt86plus.backup')
+        open('temp/mt86plus.backup')
     except FileNotFoundError:
-        with open('mt86plus.backup', 'w') as file_backup:
+        with open('temp/mt86plus.backup', 'w') as file_backup:
             temp = file_backup
             file_backup.writelines(file)
 

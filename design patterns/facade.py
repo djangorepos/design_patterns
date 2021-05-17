@@ -30,7 +30,7 @@ class Subsystem1:
     def operation1() -> set[str]:
         words_set = WORDS_SET
         word = ''
-        with open('ape_words.txt', 'r') as words_data:
+        with open('temp\hamlet.txt', 'r') as words_data:
             words_list = words_data.readlines()
             for i in range(len(words_list)):
                 for j in range(len(words_list[i])):
@@ -100,7 +100,7 @@ class Subsystem2:
         if ape_set is None:
             ape_set = set()
         print("Subsystem1: Searching for words...")
-        with open('monkeys.txt', 'r') as ape_words:
+        with open('temp\monkeys.txt', 'r') as ape_words:
             ape_list = ape_words.readlines()
             ape_word: str = ''
             for i in range(len(ape_list)):
@@ -118,7 +118,7 @@ class Subsystem2:
 
     @staticmethod
     def operation2(i: int, word_set=None) -> str:
-        with open('ape_words.txt', 'a') as ape_words:
+        with open("temp\words.txt", "a") as ape_words:
             for j in word_set:
                 ape_words.write(j)
                 ape_words.write(' ')

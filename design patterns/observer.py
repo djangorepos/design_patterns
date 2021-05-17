@@ -3,6 +3,8 @@ from abc import ABC, abstractmethod
 from random import randrange
 from typing import List
 
+from text_to_speech import speak
+
 
 class Subject(ABC):
     state: int = None
@@ -53,12 +55,14 @@ class ConcreteObserverA(Observer):
     def update(self, sub: Subject) -> None:
         if sub.state < 3:
             print("ConcreteObserverA: Reacted to the event")
+            speak("Unbelievable!")
 
 
 class ConcreteObserverB(Observer):
     def update(self, sub: Subject) -> None:
         if sub.state == 0 or sub.state >= 2:
             print("ConcreteObserverB: Reacted to the event")
+            speak("WoW!")
 
 
 if __name__ == "__main__":

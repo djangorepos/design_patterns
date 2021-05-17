@@ -50,11 +50,11 @@ if __name__ == "__main__":
             print(f"William Shakespeare: {SPEECH}")
             print(f"Ape: pressinganykey: {monkey_code}")
             print(f"Shakespeare wins, Apes = {Apes}\n")
-            with open('monkeys.txt', 'a') as file:
+            with open('temp/monkeys.txt', 'a') as file:
                 file.write(f"{monkey_code}\n")
         else:
             SPEECH = ''
             print("Monkey wins")
-            with open('monkeys.txt', 'a') as file:
+            with open('temp/monkeys.txt', 'a') as file:
                 file.write("Monkey wins")
             break

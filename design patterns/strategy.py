@@ -5,7 +5,7 @@ import os
 
 RECURSION = True
 SHOW_DICT = True
-NUMBER: int = 100000
+NUMBER: int = 10
 if NUMBER > 10000:
     RECURSION = False
     SHOW_DICT = False
@@ -78,6 +78,7 @@ class ConcreteStrategyD(Strategy):
         cache = {1: 1, 2: 1}
 
         def fib(n):
+            result = None
             for i in range(3, n+1):
                 result = np.matrix([[1, 1], [1, 0]], dtype=object) ** i
                 cache[i] = result[0, 1]
@@ -128,5 +129,5 @@ if __name__ == "__main__":
     print("Client: Strategy is set to matrix.")
     if NUMBER == 100000:
         sleep(3)
-        os.system("python matrix.py")
+        os.system("python temp/matrix.py")
     context.context_interface()
