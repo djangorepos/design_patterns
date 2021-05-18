@@ -1,3 +1,6 @@
+from text_to_speech import speak
+
+
 class Component:
 
     def operation(self) -> str:
@@ -47,19 +50,23 @@ def client_code(component: Component) -> None:
 if __name__ == "__main__":
     simple = ConcreteComponent()
     print("Client: I've got a simple component:")
+    speak("I've got a simple component")
     client_code(simple)
     print("\n")
 
     decorator1 = ConcreteDecoratorA(simple)
-    print("Client: Now I've got a decorated component:")
+    print("Client: Now I've got a decorated component (Decorator A):")
+    speak("Now I've got a decorated component (Decorator A)")
     client_code(decorator1)
     print("\n")
 
     decorator2 = ConcreteDecoratorB(decorator1)
-    print("Client: Now I've got a decorated component:")
+    print("Client: Now I've got a decorated component (Decorator B):")
+    speak("Now I've got a decorated component (Decorator B)")
     client_code(decorator2)
     print("\n")
 
     decorator3 = ConcreteDecoratorC(decorator2)
-    print("Client: Now I've got a decorated component:")
+    print("Client: Now I've got a decorated component (Decorator C):")
+    speak("Now I've got a decorated component (Decorator C)")
     client_code(decorator3)

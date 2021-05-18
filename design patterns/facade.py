@@ -2,6 +2,8 @@ from __future__ import annotations
 from string import ascii_letters
 import random
 
+from text_to_speech import speak
+
 WORDS_SET = {'To', 'be', 'or', 'not', 'that', 'is', 'the', 'question', 'a'}
 LETTERS = ascii_letters + "'"
 
@@ -14,12 +16,15 @@ class Facade:
     @property
     def operation(self):
         print("Facade: Initializing subsystems:")
+        speak("Initializing subsystems")
         w_s = self._subsystem1.operation1()
         print("Facade: Order subsystems to perform the action:")
+        speak("Order subsystems to perform the action")
         a_s = self._subsystem2.operation1(w_s)
         founded = self._subsystem1.operation2(a_s)
         print(self._subsystem2.operation2(founded, w_s))
         print("Facade: Generating text from all known words:")
+        speak("Generating text from all known words")
         self._subsystem1.operation2(w_s)
         return "Facade: All done!"
 
@@ -41,7 +46,7 @@ class Subsystem1:
                             words_set.add(word.lower())
                             words_set.add(word.capitalize())
                         word = ''
-        print("Subsystem1: Words set completed.")
+        print("Subsystem1: Words set finished.")
         return words_set
 
     @staticmethod
@@ -134,3 +139,4 @@ if __name__ == "__main__":
     subsystem2 = Subsystem2()
     facade = Facade(subsystem1, subsystem2)
     client_code(facade)
+
