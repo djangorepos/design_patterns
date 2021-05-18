@@ -17,7 +17,7 @@ class SimpleCommand(Command):
         self._payload = payload
 
     def execute(self) -> None:
-        print(f"SimpleCommand: Hi!"
+        print(f"SimpleCommand: Hi! "
               f"{self._payload}")
         speak(f"Hi!"
               f"{self._payload}")
