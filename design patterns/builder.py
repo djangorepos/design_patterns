@@ -24,34 +24,37 @@ class Builder(ABC):
         pass
 
 
-class ConcreteBuilder1(Builder):
+class ConcreteBuilder(Builder):
 
     def __init__(self) -> None:
-        self._product = Product1()
-        self.reset()
+        self._product = Product()
 
     def reset(self) -> None:
-        pass
+        self._product = Product()
 
     @property
-    def product(self) -> Product1:
+    def product(self) -> Product:
         product = self._product
         self.reset()
         return product
 
     def produce_part_a(self) -> None:
-        self._product.add("PartA1")
+        self._product.add("Part A1")
 
     def produce_part_b(self) -> None:
-        self._product.add("PartB1")
+        self._product.add("Part B1")
 
     def produce_part_c(self) -> None:
-        self._product.add("PartC1")
+        self._product.add("Part C1")
 
 
-class Product1:
+class Product:
 
     def __init__(self) -> None:
+        """
+
+        :rtype: object
+        """
         self.parts = []
 
     def add(self, part: Any) -> None:
@@ -84,7 +87,7 @@ class Director:
 
 if __name__ == "__main__":
     director = Director()
-    builder = ConcreteBuilder1()
+    builder = ConcreteBuilder()
     director.builder = builder
 
     print("Standard basic product: ")

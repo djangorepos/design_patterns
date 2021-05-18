@@ -8,14 +8,14 @@ class Abstraction:
         self._implementation = imp
 
     def operation(self) -> str:
-        return (f"Abstraction: Base operation with:\n"
+        return (f"Abstraction: Base operation with ConcreteImplementation:\n"
                 f"{self._implementation.operation_implementation()}")
 
 
 class ExtendedAbstraction(Abstraction):
 
     def operation(self) -> str:
-        return (f"ExtendedAbstraction: Extended operation with:\n"
+        return (f"ExtendedAbstraction: Extended operation with ConcreteImplementation:\n"
                 f"{self._implementation.operation_implementation()}")
 
 

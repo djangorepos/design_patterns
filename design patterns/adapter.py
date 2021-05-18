@@ -27,23 +27,19 @@ def client_code(_target: Target) -> str:
 
 if __name__ == "__main__":
     print("Client: I can work just fine with the Target objects:")
-    speak("Client: I can work just fine with the Target objects:")
+    speak("I can work just fine with the Target objects:")
     target = Target()
     client_code(target)
     adaptee = Adaptee()
     print("Client: The Adaptee class has a weird interface. "
           "See, I don't understand it:")
-    speak("Client: The Adaptee class has a weird interface. "
+    speak("The Adaptee class has a weird interface. "
           "See, I don't understand it:")
     print(f"Adaptee: {adaptee.specific_request()}", end="\n")
-    speak(f"Adaptee: {adaptee.specific_request()}")
     print("Client: But I can work with it via the Adapter:")
-    speak("Client: But I can work with it via the Adapter:")
+    speak("But I can work with it via the Adapter:")
     adapter = Adapter()
     print(client_code(adapter))
-    speak(client_code(adapter))
     translator = Translator()
     result = translator.translate(client_code(adapter), dest="ru")
-    print(f"Translator: (TRANSLATE) {str(result)[42:186]}")
-    speak(f"Translator: (TRANSLATE) {str(result)[42:186]}")
-    speak(f"Translator: (TRANSLATE) {str(result)[42:186]}", "ru")
+    print(f"Translator: (TRANSLATE) {str(result)[42:241:]}")
