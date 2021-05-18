@@ -43,7 +43,7 @@ def client_code(creator: Creator) -> str:
 
 if __name__ == "__main__":
     Apes = 0
-    while SPEECH:
+    while Apes < 1000_000:
         monkey_code = client_code(ConcreteCreator())
         Apes += 1
         if SPEECH != monkey_code:
@@ -53,7 +53,6 @@ if __name__ == "__main__":
             with open('temp/monkeys.txt', 'a') as file:
                 file.write(f"{monkey_code}\n")
         else:
-            SPEECH = ''
             print("Monkey wins")
             with open('temp/monkeys.txt', 'a') as file:
                 file.write("Monkey wins")
