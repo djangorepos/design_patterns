@@ -2,6 +2,8 @@ from __future__ import annotations
 from abc import ABC, abstractmethod
 from typing import List
 
+from text_to_speech import speak
+
 
 class Component(ABC):
 
@@ -60,12 +62,12 @@ class Composite(Component):
     def operation(self) -> str:
         for child in self._children:
             self.results.append(child.operation())
-        return f"Branch({'+'.join(self.results)})"
+        return f"\nBranch({'+'.join(self.results)})"
 
 
 def client_code(component: Component) -> None:
 
-    print(f"RESULT: {component.operation()}", end="")
+    print(f"RESULT: {component.operation()}", end='')
 
 
 def client_code2(component1: Component, component2: Component) -> None:
@@ -73,12 +75,13 @@ def client_code2(component1: Component, component2: Component) -> None:
     if component1.is_composite():
         component1.add(component2)
 
-    print(f"RESULT: {component1.operation()}", end="")
+    print(f"RESULT: {component1.operation()}", end='')
 
 
 if __name__ == "__main__":
     simple = Leaf()
     print("Client: I've got a simple component:")
+    speak("I've got a simple component")
     client_code(simple)
     print("\n")
 
@@ -95,8 +98,10 @@ if __name__ == "__main__":
     tree.add(branch2)
 
     print("Client: Now I've got a composite tree:")
+    speak("Now I've got a composite tree")
     client_code(tree)
     print("\n")
 
     print("Client: I don't need to check the components classes even when managing the tree:")
+    speak("I don't need to check the components classes even when managing the tree:")
     client_code2(tree, simple)
