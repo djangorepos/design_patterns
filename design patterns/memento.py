@@ -6,6 +6,8 @@ from random import randint
 from string import ascii_lowercase, digits
 from time import sleep
 
+from text_to_speech import speak
+
 DATA = ascii_lowercase + digits
 
 
@@ -17,7 +19,7 @@ def loading():
 
 
 class Originator:
-    _state = Noney
+    _state = None
 
     def __init__(self, state: list[str]) -> None:
         self._state = state
@@ -26,13 +28,13 @@ class Originator:
     def create_new_file(self) -> None:
         print("Originator: Generating new file.")
         loading()
-        self._state = self._generate_random_file(len(self._state))
+        self._state = self.generate_random_file(len(self._state))
         with open('temp/mt86plus', 'w') as mt86plus:
             mt86plus.writelines(self._state)
         print(f"Originator: My state has changed to: {self._state[0][:39]}")
 
     @staticmethod
-    def _generate_random_file(length: int):
+    def generate_random_file(length: int):
         seq = ''
         result = []
         for i in range(length):
@@ -138,11 +140,14 @@ if __name__ == "__main__":
 
     while True:
         print(f"\nClient: There are {caretaker.backups} restore points:")
+        speak(f"There are {caretaker.backups} restore points")
         caretaker.show_history()
         if caretaker.backups > 1:
             print("Client: Rollback? y/n\n")
+            speak("Rollback? yes or no")
         elif caretaker.backups == 1:
             print("Client: Return to original state? y/n\n")
+            speak("Return to original state? yes or no\n")
         elif caretaker.backups == 0:
             break
         key = input()
@@ -152,6 +157,8 @@ if __name__ == "__main__":
         elif key == 'n' or key == 'N':
             break
         else:
-            print('Wrong symbol, try again')
+            print("Client: Wrong symbol, try again")
+            speak("Wrong symbol, try again")
 
     print("Client: No mementos, find mt86plus.backup")
+    speak("No mementos, find backup file")
