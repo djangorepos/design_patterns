@@ -41,8 +41,8 @@ class BaseComponent:
         return self._mediator
 
     @mediator.setter
-    def mediator(self, mediator: Mediator) -> None:
-        self._mediator = mediator
+    def mediator(self, media: Mediator) -> None:
+        self._mediator = media
 
 
 class Component1(BaseComponent):
