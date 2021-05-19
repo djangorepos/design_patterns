@@ -10,9 +10,9 @@ class AbstractClass(ABC):
         self.required_operations1()
         self.base_operation2()
         self.hook1()
+        self.hook2()
         self.required_operations2()
         self.base_operation3()
-        self.hook2()
 
     @staticmethod
     def base_operation1() -> None:

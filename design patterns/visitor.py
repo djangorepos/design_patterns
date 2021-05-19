@@ -1,6 +1,7 @@
 from __future__ import annotations
 from abc import ABC, abstractmethod
 from typing import List
+from text_to_speech import speak
 
 
 class Component(ABC):
@@ -66,10 +67,12 @@ def client_code(comp: List[Component], visitor: Visitor) -> None:
 if __name__ == "__main__":
     components = [ConcreteComponentA(), ConcreteComponentB()]
 
-    print("The client code works with all visitors via the base Visitor interface:")
+    print("Client: The client code works with all visitors via the base Visitor interface:")
+    speak("The client code works with all visitors via the base Visitor interface")
     visitor1 = ConcreteVisitor1()
     client_code(components, visitor1)
 
-    print("It allows the same client code to work with different types of visitors:")
+    print("Client: It allows the same client code to work with different types of visitors:")
+    speak("It allows the same client code to work with different types of visitors")
     visitor2 = ConcreteVisitor2()
     client_code(components, visitor2)
