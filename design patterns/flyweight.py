@@ -1,5 +1,6 @@
 import json
 from typing import Dict
+from text_to_speech import speak
 
 
 class Flyweight:
@@ -9,7 +10,7 @@ class Flyweight:
     def operation(self, unique_state: list) -> None:
         s = json.dumps(self._shared_state)
         u = json.dumps(unique_state)
-        print(f"Flyweight: Displaying shared ({s}) and unique ({u}) state.", end="")
+        print(f"Flyweight: Displaying shared {s} and unique {u} state.")
 
 
 class FlyweightFactory:
@@ -34,21 +35,21 @@ class FlyweightFactory:
 
         return self._flyweights[key]
 
-    def list_flyweights(self) -> None:
+    def list_of_flyweights(self) -> None:
         count = len(self._flyweights)
         print(f"FlyweightFactory: I have {count} flyweights:")
-        print("\n".join(map(str, self._flyweights.keys())), end="")
+        print("\n".join(map(str, self._flyweights.keys())), end="\n")
 
 
-def add_aircraft_to_police_database(_factory: FlyweightFactory, plates: str, owner: str,
-                               brand: str, model: str, color: str) -> None:
-    print("\n\nClient: Adding a aircraft to database.")
+def add_aircraft_to_database(_factory: FlyweightFactory, plates: str, owner: str,
+                             brand: str, model: str, color: str) -> None:
+    print("Client: Adding a new aircraft to database.")
+    speak("Adding a new aircraft to database")
     flyweight = _factory.get_flyweight([brand, model, color])
     flyweight.operation([plates, owner])
 
 
 if __name__ == "__main__":
-
     factory = FlyweightFactory([
         ["B734", "734", "Boeing 737-400"],
         ["B735", "735", "Boeing 737-500"],
@@ -60,14 +61,10 @@ if __name__ == "__main__":
         ["B741", "74T", "Boeing 747-100"],
     ])
 
-    factory.list_flyweights()
-
-    add_aircraft_to_police_database(
+    factory.list_of_flyweights()
+    add_aircraft_to_database(
         factory, "Freighter", "Developed into YAL-1 and Dreamlifter", "B741", "74T", "Boeing 747-100")
-
-    add_aircraft_to_police_database(
-        factory, "YAL-1 Large Cargo Freighter", "Deprecated in 2018: no longer flying", "B74D", "74J", "Boeing 747-400D")
-
-    print("\n")
-
-    factory.list_flyweights()
+    add_aircraft_to_database(
+        factory, "YAL-1 Large Cargo Freighter", "Deprecated in 2018: no longer flying", "B74D", "74J",
+        "Boeing 747-400D")
+    factory.list_of_flyweights()
