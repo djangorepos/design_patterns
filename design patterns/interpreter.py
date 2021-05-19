@@ -1,6 +1,26 @@
-class RomanNumeralInterpreter(object):
+import abc
 
-    def __init__(self):
+
+class AbstractExpression(metaclass=abc.ABCMeta):
+
+    @abc.abstractmethod
+    def interpret(self):
+        pass
+
+
+class NonterminalExpression(AbstractExpression):
+
+    def __init__(self, expression):
+        self._expression = expression
+
+    def interpret(self):
+        self._expression.interpret()
+
+
+class TerminalExpression(AbstractExpression):
+
+    def __init__(self, text):
+        self.text = text
         self.grammar = {
             'I': 1,
             'V': 5,
@@ -11,10 +31,10 @@ class RomanNumeralInterpreter(object):
             'M': 1000
         }
 
-    def interpret(self, text):
-        numbers = list(map(self.grammar.get, text))
+    def interpret(self):
+        numbers = list(map(self.grammar.get, self.text))
         if None in numbers:
-            raise ValueError(f"Wrong input: {text}")
+            raise ValueError(f"Wrong input: {self.text}")
         result = 0
         temp = None
         while numbers:
@@ -28,6 +48,9 @@ class RomanNumeralInterpreter(object):
 
 
 if __name__ == "__main__":
-    interp = RomanNumeralInterpreter()
-    print("MMMCMXCIX =", interp.interpret('MMMCMXCIX'))
-    print("MCMLXXXVIII =", interp.interpret('MCMLXXXVIII'))
+    interp = NonterminalExpression(TerminalExpression(''))
+    print(interp.interpret())
+    interp2 = TerminalExpression('MMMCMXCIX')
+    print("MMMCMXCIX =", interp2.interpret())
+    interp3 = TerminalExpression('MCMLXXXVIII')
+    print("MCMLXXXVIII =", interp3.interpret())
