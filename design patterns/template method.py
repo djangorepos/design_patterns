@@ -54,6 +54,10 @@ class ConcreteClass1(AbstractClass):
         print("ConcreteClass1 says: Implemented Operation2")
         speak("Implemented Operation two")
 
+    def hook1(self) -> None:
+        print("ConcreteClass1 says: Overridden Hook1")
+        speak("Overridden Hook one")
+
 
 class ConcreteClass2(AbstractClass):
 
@@ -65,9 +69,9 @@ class ConcreteClass2(AbstractClass):
         print("ConcreteClass2 says: Implemented Operation2")
         speak("Implemented Operation two")
 
-    def hook1(self) -> None:
-        print("ConcreteClass2 says: Overridden Hook1")
-        speak("Overridden Hook one")
+    def hook2(self) -> None:
+        print("ConcreteClass2 says: Overridden Hook2")
+        speak("Overridden Hook two")
 
 
 def client_code(abstract_class: AbstractClass) -> None:
