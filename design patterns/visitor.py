@@ -76,4 +76,3 @@ if __name__ == "__main__":
     speak("It allows the same client code to work with different types of visitors")
     visitor2 = ConcreteVisitor2()
     client_code(components, visitor2)
-    # commited
