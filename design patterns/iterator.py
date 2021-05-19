@@ -5,9 +5,7 @@ from text_to_speech import speak
 
 
 class AlphabeticalOrderIterator(Iterator):
-
     _position: int = None
-
     _reverse: bool = False
 
     def __init__(self, col: WordsCollection, reverse: bool = False) -> None:
@@ -16,7 +14,6 @@ class AlphabeticalOrderIterator(Iterator):
         self._position = -1 if reverse else 0
 
     def __next__(self):
-
         try:
             value = self._collection[self._position]
             self._position += -1 if self._reverse else 1
@@ -34,8 +31,10 @@ class WordsCollection(Iterable):
         self._collection = col
 
     def __iter__(self) -> AlphabeticalOrderIterator:
-
         return AlphabeticalOrderIterator(self._collection)
+
+    def __getitem__(self, key):
+        return getattr(self, key)
 
     def get_reverse_iterator(self) -> AlphabeticalOrderIterator:
         return AlphabeticalOrderIterator(self._collection, True)
@@ -45,7 +44,6 @@ class WordsCollection(Iterable):
 
 
 if __name__ == "__main__":
-
     collection = WordsCollection()
     collection.add_item("First")
     collection.add_item("Second")
