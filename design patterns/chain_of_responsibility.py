@@ -1,46 +1,53 @@
+from abc import ABCMeta, abstractmethod
+from random import randint
 from text_to_speech import speak
 
 
-class HttpHandler:
-    def handle(self, code):
-        raise NotImplementedError()
+class IHandler(metaclass=ABCMeta):
+
+    @abstractmethod
+    def handle(self, payload):
+        pass
 
 
-class Http404Handler(HttpHandler):
-    def handle(self, code):
-        if code == 404:
-            return "Error 404 Not Found"
+class Successor1(IHandler):
+
+    def handle(self, payload):
+        print(f"Successor1: payload = {payload}")
+        test = randint(1, 2)
+        if test == 1:
+            payload = payload + 1
+            payload = Successor1().handle(payload)
+        if test == 2:
+            payload = payload - 1
+            payload = Successor2().handle(payload)
+        return payload
 
 
-class Http500Handler(HttpHandler):
-    def handle(self, code):
-        if code == 500:
-            return "500 Internal Server Error"
+class Successor2(IHandler):
+
+    def handle(self, payload):
+        print(f"Successor2 payload = {payload}")
+        test = randint(1, 3)
+        if test == 1:
+            payload = payload * 2
+            payload = Successor1().handle(payload)
+        if test == 2:
+            payload = payload / 2
+            payload = Successor2().handle(payload)
+        return payload
 
 
 class Client:
-    def __init__(self):
-        self._handlers = []
 
-    def add_handler(self, h):
-        self._handlers.append(h)
-
-    def response(self, code):
-        for h in self._handlers:
-            msg = h.handle(code)
-            if msg:
-                print(msg)
-                speak(msg)
-                break
-        else:
-            print("HTTP 400 Bad Request")
-            speak("HTTP 400 Bad Request")
+    @staticmethod
+    def start(payload):
+        return Successor1().handle(payload)
 
 
 if __name__ == "__main__":
-    client = Client()
-    client.add_handler(Http404Handler())
-    client.add_handler(Http500Handler())
-    client.response(400)  # Код не обработан
-    client.response(404)  # Ответ: Страница не найдена
-    client.response(500)  # Ответ: Ошибка сервера
+    CHAIN = Client()
+    PAYLOAD = 1
+    OUT = CHAIN.start(PAYLOAD)
+    print(f"Client: Finished result = {OUT}")
+    speak(f"Finished result = {OUT}")
