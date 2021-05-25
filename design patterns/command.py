@@ -4,6 +4,13 @@ from text_to_speech import speak
 import pyttsx3
 
 
+def complex_speak(complex_stuff, token):
+    engine = pyttsx3.init()
+    engine.setProperty('voice', 'HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\Voices\\Tokens\\' + token)
+    engine.say(complex_stuff)
+    engine.runAndWait()
+
+
 class Command(ABC):
 
     @abstractmethod
@@ -32,15 +39,7 @@ class ComplexCommand(Command):
 
     def execute(self) -> None:
         print("ComplexCommand: Complex stuff should be done by a receiver object", end="")
-
-        def complex_speak(complex_stuff):
-            engine = pyttsx3.init()
-            engine.setProperty('voice', 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech\Voices\Tokens\TTS_MS_EN'
-                                        '-US_ZIRA_11.0')
-            engine.say(complex_stuff)
-            engine.runAndWait()
-
-        complex_speak("Complex stuff should be done by a receiver object")
+        complex_speak("Complex stuff should be done by a receiver object", 'TTS_MS_EN-US_ZIRA_11.0')
         self._receiver.do_something(self._a)
         self._receiver.do_something_else(self._b)
 
@@ -50,12 +49,12 @@ class Receiver:
     @staticmethod
     def do_something(a: str) -> None:
         print(f"\nReceiver: Working on ({a}.)", end="")
-        speak(f"\nReceiver: Working on ({a}.)")
+        complex_speak(f"Working on ({a}.)", 'TTS_MS_EN-GB_HAZEL_11.0')
 
     @staticmethod
     def do_something_else(b: str) -> None:
         print(f"\nReceiver: Also working on ({b}.)", end="")
-        speak(f"\nReceiver: Also working on ({b}.)")
+        complex_speak(f"Also working on ({b}.)", 'TTS_MS_EN-GB_HAZEL_11.0')
 
 
 class Invoker:
@@ -69,24 +68,16 @@ class Invoker:
         self._on_finish = command
 
     def do_something_important(self) -> None:
-
-        def invoker_speak(complex_stuff):
-            engine = pyttsx3.init()
-            engine.setProperty('voice', 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech\Voices\Tokens\TTS_MS_EN'
-                                        '-US_DAVID_11.0')
-            engine.say(complex_stuff)
-            engine.runAndWait()
-
         print("Invoker: Does anybody want something done before I begin?")
-        invoker_speak("Does anybody want something done before I begin?")
+        complex_speak("Does anybody want something done before I begin?", 'TTS_MS_EN-US_DAVID_11.0')
         if isinstance(self._on_start, Command):
             self._on_start.execute()
 
         print("Invoker: ...doing something really important...")
-        invoker_speak("doing something really important")
+        complex_speak("doing something really important", 'TTS_MS_EN-US_DAVID_11.0')
 
         print("Invoker: Does anybody want something done after I finish?")
-        invoker_speak("Does anybody want something done after I finish?")
+        complex_speak("Does anybody want something done after I finish?", 'TTS_MS_EN-US_DAVID_11.0')
         if isinstance(self._on_finish, Command):
             self._on_finish.execute()
 
