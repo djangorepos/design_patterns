@@ -1,5 +1,6 @@
 from __future__ import annotations
 from abc import ABC, abstractmethod
+import qrcode
 
 
 class Abstraction:
@@ -28,11 +29,19 @@ class Implementation(ABC):
 
 class ConcreteImplementationA(Implementation):
     def operation_implementation(self) -> str:
+        data = "https://pythonist.ru/"
+        filename = "temp/pythonist_ru.png"
+        img = qrcode.make(data)
+        img.save(filename)
         return "ConcreteImplementationA: Here's the result on the platform A."
 
 
 class ConcreteImplementationB(Implementation):
     def operation_implementation(self) -> str:
+        data = "https://python.org/"
+        filename = "temp/python_org.png"
+        img = qrcode.make(data)
+        img.save(filename)
         return "ConcreteImplementationB: Here's the result on the platform B."
 
 
@@ -41,7 +50,6 @@ def client_code(abstract: Abstraction) -> None:
 
 
 if __name__ == "__main__":
-
     implementation = ConcreteImplementationA()
     abstraction = Abstraction(implementation)
     client_code(abstraction)
