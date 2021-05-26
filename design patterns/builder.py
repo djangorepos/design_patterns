@@ -90,21 +90,21 @@ if __name__ == "__main__":
     builder = ConcreteBuilder()
     director.builder = builder
 
-    print("Standard basic product: ")
+    print("Client: Standard basic product: ")
     speak("Standard basic product: ")
     director.build_minimal_viable_product()
     builder.product.list_parts()
 
     print("\n")
 
-    print("Standard full featured product: ")
+    print("Client: Standard full featured product: ")
     speak("Standard full featured product: ")
     director.build_full_featured_product()
     builder.product.list_parts()
 
     print("\n")
 
-    print("Custom product: ")
+    print("Client: Custom product: ")
     speak("Custom product: ")
     builder.produce_part_a()
     builder.produce_part_b()
