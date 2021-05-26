@@ -28,11 +28,11 @@ class Successor2(IHandler):
 
     def handle(self, payload):
         print(f"Successor2 payload = {payload}")
-        test = randint(1, 3)
-        if test == 1:
+        test = randint(1, 10)
+        if test in (1, 2, 3, 4, 5):
             payload = payload * 2
             payload = Successor1().handle(payload)
-        if test == 2:
+        if test in (5, 6, 7, 8, 9):
             payload = payload / 2
             payload = Successor2().handle(payload)
         return payload
