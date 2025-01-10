@@ -1,7 +1,7 @@
 from __future__ import annotations
 from abc import ABC, abstractmethod, abstractproperty
 from typing import Any
-from text_to_speech import speak
+from pyttsx3 import speak
 
 
 # noinspection PyDeprecation

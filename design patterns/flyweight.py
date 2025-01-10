@@ -1,6 +1,6 @@
 import json
 from typing import Dict
-from text_to_speech import speak
+from pyttsx3 import speak
 
 
 class Flyweight:

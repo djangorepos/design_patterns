@@ -2,7 +2,7 @@ from __future__ import annotations
 from abc import ABC, abstractmethod
 from typing import List
 
-from text_to_speech import speak
+from pyttsx3 import speak
 
 
 class Component(ABC):

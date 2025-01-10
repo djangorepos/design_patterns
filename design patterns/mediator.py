@@ -1,6 +1,6 @@
 from __future__ import annotations
 from abc import ABC
-from text_to_speech import speak
+from pyttsx3 import speak
 
 
 class Mediator(ABC):

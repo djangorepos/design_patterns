@@ -2,7 +2,7 @@ from __future__ import annotations
 from string import ascii_letters
 import random
 
-from text_to_speech import speak
+from pyttsx3 import speak
 
 WORDS_SET = {'To', 'be', 'or', 'not', 'that', 'is', 'the', 'question', 'a'}
 LETTERS = ascii_letters + "'"

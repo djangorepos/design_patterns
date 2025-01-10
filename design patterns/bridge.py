@@ -2,7 +2,6 @@ from __future__ import annotations
 from abc import ABC, abstractmethod
 import qrcode
 
-
 class Abstraction:
 
     def __init__(self, imp: Implementation) -> None:

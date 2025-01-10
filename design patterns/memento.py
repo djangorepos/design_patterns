@@ -6,7 +6,7 @@ from random import randint
 from string import ascii_lowercase, digits
 from time import sleep
 
-from text_to_speech import speak
+from pyttsx3 import speak
 
 DATA = ascii_lowercase + digits
 

@@ -1,6 +1,6 @@
 from abc import ABCMeta, abstractmethod
 from random import randint
-from text_to_speech import speak
+from pyttsx3 import speak
 
 
 class IHandler(metaclass=ABCMeta):

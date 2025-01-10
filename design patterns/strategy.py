@@ -5,8 +5,8 @@ import os
 
 RECURSION = True
 SHOW_DICT = True
-NUMBER: int = 10
-if NUMBER > 10000:
+NUMBER: int = 100000
+if NUMBER >= 10000:
     RECURSION = False
     SHOW_DICT = False
 
@@ -28,9 +28,6 @@ class ConcreteStrategyA(Strategy):
         n = fib2
         if SHOW_DICT:
             print(n, cache.values(), end=' ')
-        else:
-            print(n, end=' ')
-
 
 class ConcreteStrategyB(Strategy):
     def algorithm_interface(self):
@@ -48,8 +45,6 @@ class ConcreteStrategyB(Strategy):
         n = fib2
         if SHOW_DICT:
             print(n, cache.values(), end=' ')
-        else:
-            print(n, end=' ')
 
 
 class ConcreteStrategyC(Strategy):

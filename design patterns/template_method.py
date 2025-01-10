@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from text_to_speech import speak
+from pyttsx3 import speak
 
 
 class AbstractClass(ABC):

@@ -1,7 +1,7 @@
 from __future__ import annotations
 from abc import ABC, abstractmethod
 from random import randint
-from text_to_speech import speak
+from pyttsx3 import speak
 
 
 class AbstractFactory(ABC):

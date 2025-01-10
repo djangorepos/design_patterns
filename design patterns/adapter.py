@@ -1,5 +1,6 @@
+import asyncio
 from googletrans import Translator
-from text_to_speech import speak
+from pyttsx3 import speak
 
 
 class Target:
@@ -41,5 +42,5 @@ if __name__ == "__main__":
     adapter = Adapter()
     print(client_code(adapter))
     translator = Translator()
-    result = translator.translate(client_code(adapter), dest="ru")
+    result = asyncio.run(translator.translate(client_code(adapter), dest="ru"))
     print(f"Translator: (TRANSLATE) {str(result)[42:241:]}")

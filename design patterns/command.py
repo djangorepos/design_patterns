@@ -1,14 +1,23 @@
 from __future__ import annotations
 from abc import ABC, abstractmethod
-from text_to_speech import speak
-import pyttsx3
+from pyttsx3 import speak
+from gtts import gTTS
+from langdetect import detect
+from playsound3 import playsound
 
+def complex_speak(complex_stuff, accent=None):
+    try:
+        # Detect language of the user's message
+        detected_language = accent or detect(complex_stuff)
+    except Exception as e:
+        detected_language = 'en'  # Default to English if detection fails
+        print(f"Could not detect language, defaulting to English. Error: {e}")
 
-def complex_speak(complex_stuff, token):
-    engine = pyttsx3.init()
-    engine.setProperty('voice', 'HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\Voices\\Tokens\\' + token)
-    engine.say(complex_stuff)
-    engine.runAndWait()
+    # Generate speech
+    tts = gTTS(complex_stuff, lang=detected_language)
+    audio_file_path = '/audio/output.mp3'
+    tts.save(audio_file_path)
+    playsound(audio_file_path)
 
 
 class Command(ABC):
@@ -39,7 +48,7 @@ class ComplexCommand(Command):
 
     def execute(self) -> None:
         print("ComplexCommand: Complex stuff should be done by a receiver object", end="")
-        complex_speak("Complex stuff should be done by a receiver object", 'TTS_MS_EN-US_ZIRA_11.0')
+        complex_speak("Complex stuff should be done by a receiver object", "en-us")
         self._receiver.do_something(self._a)
         self._receiver.do_something_else(self._b)
 
@@ -49,12 +58,12 @@ class Receiver:
     @staticmethod
     def do_something(a: str) -> None:
         print(f"\nReceiver: Working on ({a}.)", end="")
-        complex_speak(f"Working on ({a}.)", 'TTS_MS_EN-GB_HAZEL_11.0')
+        complex_speak(f"Working on ({a}.)", "en-au")
 
     @staticmethod
     def do_something_else(b: str) -> None:
         print(f"\nReceiver: Also working on ({b}.)", end="")
-        complex_speak(f"Also working on ({b}.)", 'TTS_MS_EN-GB_HAZEL_11.0')
+        complex_speak(f"Also working on ({b}.)", "en-au")
 
 
 class Invoker:
@@ -69,15 +78,15 @@ class Invoker:
 
     def do_something_important(self) -> None:
         print("Invoker: Does anybody want something done before I begin?")
-        complex_speak("Does anybody want something done before I begin?", 'TTS_MS_EN-US_DAVID_11.0')
+        complex_speak("Does anybody want something done before I begin?", "en-uk")
         if isinstance(self._on_start, Command):
             self._on_start.execute()
 
         print("Invoker: ...doing something really important...")
-        complex_speak("doing something really important", 'TTS_MS_EN-US_DAVID_11.0')
+        complex_speak("doing something really important", "en-uk")
 
         print("Invoker: Does anybody want something done after I finish?")
-        complex_speak("Does anybody want something done after I finish?", 'TTS_MS_EN-US_DAVID_11.0')
+        complex_speak("Does anybody want something done after I finish?", "en-uk")
         if isinstance(self._on_finish, Command):
             self._on_finish.execute()
 
